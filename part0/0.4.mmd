@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser ->> server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    Note right of browser: The browser transmits a text/html file to the server, which includes the content "Hello."
+    server -->> browser: HTTP Status 302 - Found
+    deactivate server
+
+    browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server -->> browser: HTTP Status 200 - OK Return text/html
+    deactivate server
+
+    browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server -->> browser: HTTP Status 200 - OK Return text/css
+    deactivate server
+
+    browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server and refresh the page
+    server -->> browser: HTTP Status 200 - OK Return aplication/js
+    deactivate server
+
+    browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server -->> browser: HTTP Status 200 - OK Return aplication/json
+    deactivate server
+    Note right of browser: The browser executes the callback function that renders the notes
+

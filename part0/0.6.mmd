@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser ->> server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate server
+    Note right of browser: The browser transmits a text/html file to the server
+    Note left of server:  server push the content in note Array {content: "Hello", date: "2024-01-31T22:23:10.544Z"}
+
+    server -->> browser: HTTP Status 201 - Created
+    deactivate server
+    Note right of browser: The browser executes the event handler that renders the notes
